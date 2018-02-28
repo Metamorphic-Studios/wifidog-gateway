@@ -201,6 +201,7 @@ authenticate_client(request * r)
         fw_deny(client);
         safe_asprintf(&urlFragment, "%smessage=%s&token=%s",
                       auth_server->authserv_msg_script_path_fragment, GATEWAY_MESSAGE_DENIED, client->token);
+        debug(LOG_INFO, "Got this url %s", urlFragment);
         http_send_redirect_to_auth(r, urlFragment, "Redirect to denied message");
         free(urlFragment);
         break;
