@@ -199,8 +199,8 @@ authenticate_client(request * r)
               "Got DENIED from central server authenticating token %s from %s at %s - deleting from firewall and redirecting them to denied message",
               client->token, client->ip, client->mac);
         fw_deny(client);
-        safe_asprintf(&urlFragment, "%smessage=%s&token=%s",
-                      auth_server->authserv_msg_script_path_fragment, GATEWAY_MESSAGE_DENIED, client->token);
+        safe_asprintf(&urlFragment, "%smessage=%s&ip=%s",
+                      auth_server->authserv_msg_script_path_fragment, GATEWAY_MESSAGE_DENIED, client->ip);
         debug(LOG_INFO, "Got this url %s", urlFragment);
         http_send_redirect_to_auth(r, urlFragment, "Redirect to denied message");
         free(urlFragment);
